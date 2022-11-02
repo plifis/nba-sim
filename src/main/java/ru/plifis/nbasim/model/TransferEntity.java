@@ -1,8 +1,9 @@
 package ru.plifis.nbasim.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
@@ -13,11 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
-@RequiredArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 @Accessors(chain = true)
 @Table(name = "transfers")
@@ -34,9 +35,12 @@ public class TransferEntity {
     @JoinColumn(name = "team_destination_id")
     private TeamEntity destination;
 
-    @OneToMany(mappedBy = "players_team_source")
-    private List<PlayerEntity> playerEntitiesTeamSource;
+    @OneToMany(mappedBy = "team")
+    @ToString.Exclude
+    private Set<PlayerEntity> playerEntitiesTeamSource;
 
-    @OneToMany(mappedBy = "players_team_destination")
-    private List<PlayerEntity> playerEntitiesTeamDestination;
+    @OneToMany(mappedBy = "team")
+    @ToString.Exclude
+    private Set<PlayerEntity> playerEntitiesTeamDestination;
+
 }

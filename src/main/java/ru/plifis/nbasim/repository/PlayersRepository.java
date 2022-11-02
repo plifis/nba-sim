@@ -5,12 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.plifis.nbasim.model.PlayerEntity;
 
-import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface PlayersRepository extends CrudRepository<PlayerEntity, Long> {
 
     PlayerEntity findPlayerEntityById(Long id);
 
-    Collection<PlayerEntity> findAllPlayers(Pageable pageable);
+    List<PlayerEntity> findAll(Pageable pageable);
 }

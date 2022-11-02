@@ -1,9 +1,12 @@
 package ru.plifis.nbasim.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.hibernate.Hibernate;
 import ru.plifis.nbasim.model.enums.RoundEnum;
 
 import javax.persistence.Entity;
@@ -13,15 +16,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 @Table(name = "rounds")
 public class RoundPOEntity {
@@ -30,7 +37,7 @@ public class RoundPOEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private RoundEnum roundEnum;
+    private RoundEnum roundName;
 
     private Integer winForNextRound;
     private Integer homeTeamEntityWins;
@@ -52,6 +59,24 @@ public class RoundPOEntity {
     @JoinColumn(name = "winner_id")
     private TeamEntity winner = null;
 
-    @OneToMany(mappedBy = "games")
-    private List<GameEntity> gameEntityList;
+    @OneToMany(mappedBy = "round")
+    @ToString.Exclude
+    private List<GameEntity> rounds;
+
+    @ManyToOne
+    @JoinColumn(name = "playoff_id")
+    private PlayOffEntity playOff;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RoundPOEntity that = (RoundPOEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

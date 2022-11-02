@@ -30,7 +30,7 @@ public class TeamService {
     }
 
     public List<TeamDto> finAllTeams() {
-        return teamRepository.findAllTeams()
+        return teamRepository.findAll()
                 .stream()
                 .map(teamConverter::convertTeamEntityToTeamDto).collect(Collectors.toList());
     }

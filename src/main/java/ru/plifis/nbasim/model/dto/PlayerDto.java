@@ -3,7 +3,6 @@ package ru.plifis.nbasim.model.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import ru.plifis.nbasim.model.enums.PositionEnum;
 
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 public class PlayerDto {

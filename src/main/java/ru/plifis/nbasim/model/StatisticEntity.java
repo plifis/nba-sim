@@ -6,9 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
-import ru.plifis.nbasim.model.enums.SkillEnum;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,22 +20,33 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Accessors(chain = true)
-@Table
-public class SkillEntity {
+@Table(name = "statistics")
+public class StatisticEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "skill_name")
-    private SkillEnum skillName;
+    private Integer pointsTotal;
+    private Integer assistsTotal;
+    private Integer offReboundsTotal;
+    private Integer defReboundsTotal;
+    private Integer reboundsTotal;
+    private Integer stealsTotal;
+    private Integer blocksTotal;
+    private Integer gamesPlayedTotal;
+    private Integer gamesStartTotal;
 
-    private Integer rating;
+    private Double pointsPerGame;
+    private Double assistsPerGame;
+    private Double reboundPerGame;
+    private Double stealsPerGame;
+    private Double blocksPerGame;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SkillEntity that = (SkillEntity) o;
+        StatisticEntity that = (StatisticEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 

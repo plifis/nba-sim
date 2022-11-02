@@ -33,7 +33,7 @@ public class PlayersService {
 
     //переписать для Pageable, который должен браться и сервиса настроек из БД
     public List<PlayerDto> findAllPlayers() {
-        Collection<PlayerEntity> playerEntityList =  playersRepository.findAllPlayers(Pageable.ofSize(PAGE_SIZE));
+        Collection<PlayerEntity> playerEntityList =  playersRepository.findAll(Pageable.ofSize(PAGE_SIZE));
         return playerEntityList.stream().map(dto -> playerConverter.convertPlayerEntityToPlayerDto(dto)).collect(Collectors.toList());
     }
 

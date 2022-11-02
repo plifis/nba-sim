@@ -2,7 +2,6 @@ package ru.plifis.nbasim.model.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import ru.plifis.nbasim.model.enums.MarketEnum;
 
@@ -10,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 public class TeamDto {
