@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.plifis.nbasim.converters.PlayerConverter;
+import ru.plifis.nbasim.exceptions.TeamException;
 import ru.plifis.nbasim.model.PlayerEntity;
 import ru.plifis.nbasim.model.dto.PlayerDto;
 import ru.plifis.nbasim.repository.PlayersRepository;
@@ -17,7 +18,7 @@ public class PlayersService {
     private static final Integer PAGE_SIZE = 500;
     private final PlayersRepository playersRepository;
     private final PlayerConverter playerConverter;
-
+    private final String NOT_FOUND_PLAYER = "Player with  ID %s not found";
 
     @Autowired
     public PlayersService(PlayersRepository playersRepository, PlayerConverter playerConverter) {
@@ -28,6 +29,9 @@ public class PlayersService {
 
     public PlayerDto findPlayerById(Long id) {
         var playerEntity = playersRepository.findPlayerEntityById(id);
+        if (playerEntity == null) {
+            throw new TeamException(String.format(NOT_FOUND_PLAYER, id));
+        }
         return playerConverter.convertPlayerEntityToPlayerDto(playerEntity);
     }
 
@@ -45,7 +49,7 @@ public class PlayersService {
     public Long updatePlayerById(Long id, PlayerDto player) {
         PlayerEntity playerEntity = playersRepository.findPlayerEntityById(id);
         if (playerEntity == null) {
-            throw new IllegalArgumentException(String.format("id %s not found", id));
+            throw new TeamException(String.format(NOT_FOUND_PLAYER, id));
         }
         playerEntity = playerConverter.updatePlayerEntityFromPlayerDto(player);
         return playersRepository.save(playerEntity).getId();

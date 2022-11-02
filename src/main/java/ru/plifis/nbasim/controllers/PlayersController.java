@@ -24,7 +24,7 @@ public class PlayersController {
         return ResponseEntity.ok().body(resp);
     }
 
-    @GetMapping("/player/all")
+    @GetMapping({"/player/all", "/players", "/player"})
     public ResponseEntity<List<PlayerDto>> getAllPlayers() {
         List<PlayerDto> resp = Optional.ofNullable(playersService.findAllPlayers()).orElse(null);
         return ResponseEntity.ok().body(resp);
