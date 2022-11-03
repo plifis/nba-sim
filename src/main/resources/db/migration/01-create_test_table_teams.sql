@@ -5,6 +5,6 @@ create table teams
     city          varchar(100) not null,
     arena         varchar(100) not null,
     marketSize    varchar(15)           default 'small',
-    salarycap     integer      not null default '100000000',
-    salarycurrent integer      not null default '900000'
+    salaryCap     integer      not null default '100000000',
+    salaryCurrent integer      not null default '900000'
 );

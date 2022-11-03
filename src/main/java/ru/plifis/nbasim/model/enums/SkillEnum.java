@@ -19,7 +19,11 @@ public enum SkillEnum {
     INTERIOR_DEFENCE("INTERIOR_DEFENCE"),
     PERIMETER_DEFENCE("PERIMETER_DEFENCE"),
     STEAL("STEAL"),
-    BLOCK("BLOCK");
+    BLOCK("BLOCK"),
+    SPEED("SPEED"),
+    ACCELERATION("ACCELERATION"),
+    DURABILITY("DURABILITY"),
+    JUMP("JUMP");
 
     private String value;
 

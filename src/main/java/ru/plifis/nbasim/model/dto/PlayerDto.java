@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import ru.plifis.nbasim.model.enums.PositionEnum;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -17,7 +17,7 @@ public class PlayerDto {
     private String name;
     private String surname;
     private PositionEnum position;
-    private LocalDate birthDate;
+    private Date birthDate;
     private String birthPlace;
     private String birthCountry;
     private Double height;
@@ -27,8 +27,8 @@ public class PlayerDto {
     private TeamDto team;
     @JsonProperty("contract")
     private ContractDto contract;
-    @JsonProperty("skill")
-    private SkillDto skill;
+    @JsonProperty("skills")
+    private SkillDto skills;
     @JsonProperty("badgeList")
     private List<BadgeDto> badgeList;
 }

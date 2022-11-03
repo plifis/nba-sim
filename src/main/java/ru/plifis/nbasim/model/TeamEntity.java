@@ -53,7 +53,7 @@ public class TeamEntity {
     private BigDecimal salaryCurrent;
 
     @ManyToOne
-    @JoinColumn(name = "playoffs_id", nullable = true)
+    @JoinColumn(name = "playoff_id", nullable = true)
     private PlayOffEntity playOff;
 
     @Override

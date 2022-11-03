@@ -1,5 +1,6 @@
 package ru.plifis.nbasim.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,8 @@ import ru.plifis.nbasim.model.enums.SkillEnum;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,14 +24,16 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
-@Table
+@Table(name = "skills")
 public class SkillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "skill_name")
+    @Column
+    @Enumerated(EnumType.STRING)
     private SkillEnum skillName;
 
     private Integer rating;

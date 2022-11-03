@@ -37,7 +37,7 @@ public class PlayerStatisticSeasonEntity {
     private SeasonEntity seasonEntity;
 
     @OneToOne
-    @JoinColumn(name = "statistic_season")
+    @JoinColumn(name = "statistic_id")
     private StatisticEntity statisticEntity;
 
     @Override

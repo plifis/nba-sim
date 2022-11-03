@@ -27,6 +27,7 @@ public class PlayersController {
     @GetMapping({"/player/all", "/players", "/player"})
     public ResponseEntity<List<PlayerDto>> getAllPlayers() {
         List<PlayerDto> resp = Optional.ofNullable(playersService.findAllPlayers()).orElse(null);
+        resp.stream().map(p -> p.getHeight()).reduce(Double::sum);
         return ResponseEntity.ok().body(resp);
     }
 

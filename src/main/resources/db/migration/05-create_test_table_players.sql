@@ -9,7 +9,7 @@ create table players
     birthcountry varchar(300),
     height       integer      not null,
 --     //cm
-    weight       numeric(1)   not null,
+    weight       numeric   not null,
 --     //kg
     team_id      integer references teams (id),
     contract_id integer references contracts(id),

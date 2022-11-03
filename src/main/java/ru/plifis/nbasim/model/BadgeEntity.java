@@ -37,9 +37,10 @@ public class BadgeEntity {
     private BadgeEnum badgeName;
 
     @ManyToMany
-    @JoinTable(name = "player_badge",
+    @JoinTable(name = "badges",
             joinColumns = @JoinColumn(name = "badge_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id"))    @ToString.Exclude
+            inverseJoinColumns = @JoinColumn(name = "player_id"))
+    @ToString.Exclude
     private List<SkillEntity> skills;
 
     @Override

@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import ru.plifis.nbasim.model.enums.PositionEnum;
 
 import javax.persistence.Column;
@@ -21,7 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +46,7 @@ public class PlayerEntity {
     @Enumerated(EnumType.STRING)
     private PositionEnum position;
 
-    private LocalDate birthDate;
+    private Date birthDate;
     private String birthPlace;
     private String birthCountry;
     private Integer height; //cm
@@ -59,15 +61,16 @@ public class PlayerEntity {
     private ContractEntity contract;
 
     @OneToOne
-    @JoinColumn(name = "skills_id")
-    private SkillEntity skill;
+    @JoinColumn(name = "skillsets_id")
+    @Cascade(CascadeType.ALL)
+    private SkillSetEntity skills;
 
     @ManyToMany
-    @JoinTable(name = "player_badge",
+    @JoinTable(name = "badges",
             joinColumns = @JoinColumn(name = "player_id"),
     inverseJoinColumns = @JoinColumn(name = "badge_id"))
     @ToString.Exclude
-    private List<BadgeEntity> badgeEntityList;
+    private List<BadgeEntity> badgeList;
 
     @Override
     public boolean equals(Object o) {
