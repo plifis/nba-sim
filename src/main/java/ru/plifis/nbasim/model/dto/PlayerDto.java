@@ -27,8 +27,8 @@ public class PlayerDto {
     private TeamDto team;
     @JsonProperty("contract")
     private ContractDto contract;
-    @JsonProperty("skills")
-    private SkillDto skills;
+    @JsonProperty("skillsets")
+    private SkillDto skillsets;
     @JsonProperty("badgeList")
     private List<BadgeDto> badgeList;
 }

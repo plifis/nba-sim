@@ -63,7 +63,7 @@ public class PlayerEntity {
     @OneToOne
     @JoinColumn(name = "skillsets_id")
     @Cascade(CascadeType.ALL)
-    private SkillSetEntity skills;
+    private SkillSetEntity skillsets;
 
     @ManyToMany
     @JoinTable(name = "badges",

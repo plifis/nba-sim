@@ -45,7 +45,6 @@ public class TeamEntity {
     private MarketEnum marketSize;
 
     @OneToMany
-    @JoinColumn(name = "players_list")
     @ToString.Exclude
     private List<PlayerEntity> playersList = new ArrayList<>();
 
