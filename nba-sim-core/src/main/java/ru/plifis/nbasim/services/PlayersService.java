@@ -5,8 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.plifis.nbasim.converters.PlayerConverter;
 import ru.plifis.nbasim.exceptions.TeamException;
-import ru.plifis.nbasim.repository.PlayersRepository;
 import ru.plifis.nbasim.model.PlayerEntity;
+import ru.plifis.nbasim.repository.PlayersRepository;
 import ru.plifis.nbasimmodel.model.dto.PlayerDto;
 
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class PlayersService {
     private static final Integer PAGE_SIZE = 500;
     private final PlayersRepository playersRepository;
     private final PlayerConverter playerConverter;
-    private final String NOT_FOUND_PLAYER = "Player with  ID %s not found";
+    private static final String NOT_FOUND_PLAYER = "Player with  ID %s not found";
 
     @Autowired
     public PlayersService(PlayersRepository playersRepository, PlayerConverter playerConverter) {

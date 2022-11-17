@@ -34,4 +34,11 @@ public class SkillDto {
     private Byte acceleration;
     private Byte durability;
     private Byte jump;
+
+    public Integer getTotalRating() {
+        return shootingDribble + shootingOffDribble + standingDunk + driveDunk
+                + fadeAway + postHook + contestShoot + threePoint + freeThrow + drive + passAccuracy
+                + passVision + dribbling + defenceRebound + offenseRebound + interiorDefence + perimeterDefence
+                + steal + block + speed + acceleration + durability + jump;
+    }
 }

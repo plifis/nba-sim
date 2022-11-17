@@ -7,13 +7,13 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import ru.plifis.nbasim.services.GameService;
 import ru.plifis.nbasim.services.TeamService;
 import ru.plifis.nbasimmodel.model.dto.GameDto;
 import ru.plifis.nbasimmodel.model.dto.TeamDto;
 
 import javax.websocket.server.PathParam;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @RestController
 @EnableKafka
@@ -21,22 +21,25 @@ public class GameSimClient {
     @Value("${url-engine}")
     private String urlEngine;
     private final TeamService teamService;
-
+    private final GameService gameService;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public GameSimClient(TeamService teamService) {
+    public GameSimClient(TeamService teamService, GameService gameService) {
         this.teamService = teamService;
+        this.gameService = gameService;
     }
 
     @GetMapping("/simulate_game")
-    public void simulationGame(@PathParam("idHome") Long idHome, @PathParam ("idAway") Long idAway) {
-        TeamDto home = teamService.findTeamById(idHome);
-        TeamDto away = teamService.findTeamById(idAway);
-        Map<String, TeamDto> teams = new HashMap<>();
-        teams.put("home", home);
-        teams.put("away", away);
+    public void simulationGame(@PathParam("idHome") Long idHome,
+                               @PathParam ("idAway") Long idAway) {
+
+        GameDto gameDto = new GameDto()
+                .setHomeTeam(new TeamDto().setId(idHome))
+                .setAwayTeam(new TeamDto().setId(idAway));
+
+        gameDto = gameService.preparationGameForSimulation(gameDto);
         restTemplate.put(
-                String.format("%s", urlEngine), teams, GameDto.class);
+                String.format("%s", urlEngine), gameDto, GameDto.class);
     }
 
     //заглушка

@@ -51,6 +51,12 @@ public class SkillSetEntity {
     private Byte durability;
     private Byte jump;
 
+    public Integer getTotalRating() {
+        return shootingDribble + shootingOffDribble + standingDunk + driveDunk
+                + fadeAway + postHook + contestShoot + threePoint + freeThrow + drive + passAccuracy
+                + passVision + dribbling + defenceRebound + offenseRebound + interiorDefence + perimeterDefence
+                + steal + block + speed + acceleration + durability + jump;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
