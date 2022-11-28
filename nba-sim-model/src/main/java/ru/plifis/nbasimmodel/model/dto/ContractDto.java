@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class ContractDto {
-    private Long id;
+    private Integer id;
     private BigDecimal salary;
     private Integer length;
 

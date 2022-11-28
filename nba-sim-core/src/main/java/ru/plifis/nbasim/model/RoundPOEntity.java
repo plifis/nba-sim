@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 import ru.plifis.nbasimmodel.model.enums.RoundEnum;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,13 +35,19 @@ import java.util.Objects;
 public class RoundPOEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "round_name")
     private RoundEnum roundName;
 
+    @Column(name = "win_for_next")
     private Integer winForNextRound;
+
+    @Column(name = "home_team_wins")
     private Integer homeTeamEntityWins;
+
+    @Column(name = "away_team_wins")
     private Integer awayTeamEntityWins;
 
     /**

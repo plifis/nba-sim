@@ -13,13 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class GameDto {
+    private Integer id;
     private TeamDto homeTeam;
     private StatisticDto homeStatistic;
-    private List<Long> startLineupHomeTeamIds;
-    private List<Long> benchHomeTeamIds;
+    private List<Integer> startLineupHomeTeamIds;
+    private List<Integer> benchHomeTeamIds;
     private TeamDto awayTeam;
     private StatisticDto awayStatistic;
-    private List<Long> startLineupAwayTeamIds;
-    private List<Long> benchAwayTeamIds;
+    private List<Integer> startLineupAwayTeamIds;
+    private List<Integer> benchAwayTeamIds;
     private GameTypeEnum gameTypeEnum;
 }

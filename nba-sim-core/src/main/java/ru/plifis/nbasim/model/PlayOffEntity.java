@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,10 +33,15 @@ import java.util.Set;
 public class PlayOffEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
+    @Column(name = "start_playoff")
     private LocalDate startPlayOff;
+
+    @Column(name = "end_playoff")
     private LocalDate endPlayOff;
+
+    @Column(name = "name_playoff")
     private String namePlayOff;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "playOff", orphanRemoval = true)

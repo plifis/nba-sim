@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import ru.plifis.nbasimmodel.model.enums.PositionEnum;
@@ -19,15 +18,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -39,20 +35,28 @@ import java.util.Objects;
 public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
 
-    @Column
     @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     private PositionEnum position;
 
+    @Column(name = "birthdate")
     private Date birthDate;
+
+    @Column(name = "birthplace")
     private String birthPlace;
+
+    @Column(name = "birth_country")
     private String birthCountry;
     private Integer height; //cm
-    private Double weight; //kg
+    private Integer weight; //kg
 
     @ManyToOne
     @JoinColumn(name = "team_id")
@@ -67,26 +71,8 @@ public class PlayerEntity {
     @Cascade(CascadeType.ALL)
     private SkillSetEntity skillsets;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "badges",
-            joinColumns = @JoinColumn(name = "player_id"),
-    inverseJoinColumns = @JoinColumn(name = "badge_id"))
-    private List<BadgeEntity> badgesSet = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "player_id")
+    private List<PlayerStatisticSeasonEntity> playersStatistics;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-            return false;
-        }
-        PlayerEntity that = (PlayerEntity) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

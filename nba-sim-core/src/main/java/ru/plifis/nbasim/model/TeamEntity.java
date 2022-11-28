@@ -35,10 +35,15 @@ import java.util.Set;
 public class TeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "arena")
     private String arena;
 
     @Column(name = "market_size")
@@ -50,13 +55,15 @@ public class TeamEntity {
     @ToString.Exclude
     private Set<PlayerEntity> playersList = new HashSet<>();
 
+    @Column(name = "salary_cap")
     private BigDecimal salaryCap;
+
+    @Column(name = "salary_current")
     private BigDecimal salaryCurrent;
 
     @ManyToOne
     @JoinColumn(name = "playoff_id", nullable = true)
     private PlayOffEntity playOff;
-
 
     @Override
     public boolean equals(Object o) {

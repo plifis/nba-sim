@@ -5,6 +5,7 @@ import ru.plifis.nbasim.converters.TeamConverter;
 import ru.plifis.nbasim.exceptions.TeamException;
 import ru.plifis.nbasim.model.TeamEntity;
 import ru.plifis.nbasim.repository.TeamRepository;
+import ru.plifis.nbasimmodel.model.dto.PlayerDto;
 import ru.plifis.nbasimmodel.model.dto.TeamDto;
 import ru.plifis.nbasimmodel.model.enums.PositionEnum;
 
@@ -28,7 +29,7 @@ public class TeamService {
         this.playersService = playersService;
     }
 
-    public TeamDto findTeamById(Long id) {
+    public TeamDto findTeamById(Integer id) {
         TeamEntity teamEntity = teamRepository.findTeamEntityById(id);
 
         if (teamEntity == null) {
@@ -37,7 +38,7 @@ public class TeamService {
         return teamConverter.convertTeamEntityToTeamDto(teamEntity);
     }
 
-    public Long createTeam(TeamDto teamDto) {
+    public Integer createTeam(TeamDto teamDto) {
         var teamEntity = teamConverter.convertTeamDtoToTeamEntity(teamDto);
         return teamRepository.save(teamEntity).getId();
     }
@@ -48,7 +49,7 @@ public class TeamService {
                 .map(teamConverter::convertTeamEntityToTeamDto).collect(Collectors.toList());
     }
 
-    public TeamDto updateTeam(Long id, TeamDto teamDto) {
+    public TeamDto updateTeam(Integer id, TeamDto teamDto) {
         TeamEntity teamEntity = teamRepository.findTeamEntityById(id);
         if (teamEntity == null) {
             throw new TeamException(String.format(NOT_FOUND_TEAM, id));
@@ -58,18 +59,18 @@ public class TeamService {
         return teamConverter.convertTeamEntityToTeamDto(teamEntity);
     }
 
-    public void deleteTeamById(Long id) {
+    public void deleteTeamById(Integer id) {
         teamRepository.deleteById(id);
     }
 
-    public List<Long> autoStartLineUp(TeamDto teamDto) {
-        Map<String, Long> map = new HashMap<>();
+    public List<Integer> autoStartLineUp(TeamDto teamDto) {
+        Map<String, Integer> map = new HashMap<>();
         for (PositionEnum position : PositionEnum.values()) {
             map.put(position.getValue(),
                     teamDto.getPlayersList().stream()
                     .filter(p -> p.getPosition().equals(position))
                     .max(Comparator.comparingInt(x -> x.getSkillsets().getTotalRating()))
-                            .get().getId());
+                            .map(PlayerDto::getId).orElse(0));
         }
         return new ArrayList<>(map.values());
     }

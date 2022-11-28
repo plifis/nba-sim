@@ -30,8 +30,8 @@ public class GameSimClient {
     }
 
     @GetMapping("/simulate_game")
-    public void simulationGame(@PathParam("idHome") Long idHome,
-                               @PathParam ("idAway") Long idAway) {
+    public void simulationGame(@PathParam("idHome") Integer idHome,
+                               @PathParam ("idAway") Integer idAway) {
 
         GameDto gameDto = new GameDto()
                 .setHomeTeam(new TeamDto().setId(idHome))
@@ -44,7 +44,7 @@ public class GameSimClient {
 
     //заглушка
     @KafkaListener(id = "1", topics = "results", containerFactory = "containerFactory")
-    public void getResultGame(ConsumerRecord<Long, GameDto> gameDto) {
+    public void getResultGame(ConsumerRecord<Integer, GameDto> gameDto) {
         GameDto game = gameDto.value();
         System.out.printf("%s : %s %s %d : %d%n",
                 game.getHomeTeam().getName(), game.getAwayTeam().getName(),

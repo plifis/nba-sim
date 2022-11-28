@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class TeamDto {
-    private Long id;
+    private Integer id;
     private String name;
     private String city;
     private String arena;

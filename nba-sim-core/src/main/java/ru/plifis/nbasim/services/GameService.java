@@ -23,7 +23,7 @@ public class GameService {
         this.teamService = teamService;
     }
 
-    public Long createTeam(GameDto gameDto) {
+    public Integer createTeam(GameDto gameDto) {
         GameEntity gameEntity = gameConverter.convertGameDtoToGameEntity(gameDto);
         return gameRepository.save(gameEntity).getId();
     }
@@ -35,20 +35,20 @@ public class GameService {
         gameDto.setHomeTeam(home)
                 .setAwayTeam(away);
 
-        if (gameDto.getStartLineupHomeTeamIds().isEmpty() || gameDto.getStartLineupAwayTeamIds().isEmpty()) {
-            List<Long> homeStart = teamService.autoStartLineUp(gameDto.getHomeTeam());
-            List<Long> awayStart = teamService.autoStartLineUp(gameDto.getAwayTeam());
+        if ((gameDto.getStartLineupHomeTeamIds() == null) && (gameDto.getStartLineupAwayTeamIds() == null)) {
+            List<Integer> homeStart = teamService.autoStartLineUp(gameDto.getHomeTeam());
+            List<Integer> awayStart = teamService.autoStartLineUp(gameDto.getAwayTeam());
 
-            gameDto.setStartLineupAwayTeamIds(homeStart);
+            gameDto.setStartLineupHomeTeamIds(homeStart);
             gameDto.setStartLineupAwayTeamIds(awayStart);
 
-            List<Long> benchHome = gameDto.getHomeTeam().getPlayersList().stream()
+            List<Integer> benchHome = gameDto.getHomeTeam().getPlayersList().stream()
                     .map(PlayerDto::getId)
                     .filter(id -> !homeStart.contains(id))
                     .collect(Collectors.toList());
 
 
-            List<Long> benchAway = gameDto.getAwayTeam().getPlayersList().stream()
+            List<Integer> benchAway = gameDto.getAwayTeam().getPlayersList().stream()
                     .map(PlayerDto::getId)
                     .filter(id -> !awayStart.contains(id))
                     .collect(Collectors.toList());

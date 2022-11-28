@@ -25,7 +25,7 @@ public class PlayersController {
     }
 
     @GetMapping("/player/{id}")
-    public ResponseEntity<PlayerDto> getPlayerById(@PathVariable("id") Long id) {
+    public ResponseEntity<PlayerDto> getPlayerById(@PathVariable("id") Integer id) {
         PlayerDto resp = Optional.ofNullable(playersService.findPlayerById(id)).orElse(null);
         return ResponseEntity.ok().body(resp);
     }
@@ -37,20 +37,20 @@ public class PlayersController {
     }
 
     @PostMapping("/player/add")
-    public ResponseEntity<Long> createPlayer(@RequestBody PlayerDto player) {
-        Long resp = Optional.ofNullable(playersService.createPlayer(player)).orElse(null);
+    public ResponseEntity<Integer> createPlayer(@RequestBody PlayerDto player) {
+        Integer resp = Optional.ofNullable(playersService.createPlayer(player)).orElse(null);
         return ResponseEntity.ok().body(resp);
     }
 
     @PutMapping("/player/update/{id}")
-    public ResponseEntity<Long> updatePlayerById(@PathVariable("id") Long id,
+    public ResponseEntity<Integer> updatePlayerById(@PathVariable("id") Integer id,
                                                  @RequestBody PlayerDto player) {
         id = playersService.updatePlayerById(id, player);
         return ResponseEntity.ok().body(id);
     }
 
     @DeleteMapping("/player/delete/{id}")
-    public ResponseEntity<Void> deletePlayerById(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePlayerById(@PathVariable("id") Integer id) {
         playersService.deletePlayerById(id);
         return ResponseEntity.ok().build();
     }

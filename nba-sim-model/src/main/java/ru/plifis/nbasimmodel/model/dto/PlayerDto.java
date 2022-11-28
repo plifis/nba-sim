@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class PlayerDto {
-    private Long id;
+    private Integer id;
     private String name;
     private String surname;
     private PositionEnum position;

@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,34 +26,82 @@ import java.util.Objects;
 public class SkillSetEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private Byte shootingDribble;
-    private Byte shootingOffDribble;
-    private Byte standingDunk;
-    private Byte driveDunk;
-    private Byte fadeAway;
-    private Byte postHook;
-    private Byte contestShoot;
-    private Byte threePoint;
-    private Byte freeThrow;
-    private Byte drive;
-    private Byte passAccuracy;
-    private Byte passVision;
-    private Byte dribbling;
-    private Byte defenceRebound;
-    private Byte offenseRebound;
-    private Byte interiorDefence;
-    private Byte perimeterDefence;
-    private Byte steal;
-    private Byte block;
-    private Byte speed;
-    private Byte acceleration;
-    private Byte durability;
-    private Byte jump;
+    @Column(name = "shooting_dribble")
+    private Byte shootingDribble = 0;
 
-    public Integer getTotalRating() {
-        return shootingDribble + shootingOffDribble + standingDunk + driveDunk
+    @Column(name = "shooting_off_dribble")
+    private Byte shootingOffDribble = 0;
+
+    @Column(name = "standing_dunk")
+    private Byte standingDunk = 0;
+
+    @Column(name = "drive_dunk")
+    private Byte driveDunk = 0;
+
+    @Column(name = "fade_away")
+    private Byte fadeAway = 0;
+
+    @Column(name = "post_hook")
+    private Byte postHook = 0;
+
+    @Column(name = "contest_shoot")
+    private Byte contestShoot = 0;
+
+    @Column(name = "three_point")
+    private Byte threePoint = 0;
+
+    @Column(name = "free_throw")
+    private Byte freeThrow  = 0;
+
+    @Column(name = "drive")
+    private Byte drive = 0;
+
+    @Column(name = "pass_accuracy")
+    private Byte passAccuracy = 0;
+
+    @Column(name = "pass_vision")
+    private Byte passVision = 0;
+
+    @Column(name = "dribbling")
+    private Byte dribbling = 0;
+
+    @Column(name = "defence_rebound")
+    private Byte defenceRebound = 0;
+
+    @Column(name = "offense_rebound")
+    private Byte offenseRebound = 0;
+
+    @Column(name = "interior_defence")
+    private Byte interiorDefence = 0;
+
+    @Column(name = "perimeter_defence")
+    private Byte perimeterDefence = 0;
+
+    @Column(name = "steal")
+    private Byte steal = 0;
+
+    @Column(name = "block")
+    private Byte block = 0;
+
+    @Column(name = "speed")
+    private Byte speed = 0;
+
+    @Column(name = "acceleration")
+    private Byte acceleration = 0;
+
+    @Column(name = "durability")
+    private Byte durability = 0;
+
+    @Column(name = "jump")
+    private Byte jump = 0;
+
+    @Column(name = "total_rating")
+    private Integer totalRating = 0;
+
+    public void setTotalRating() {
+        this.totalRating = shootingDribble + shootingOffDribble + standingDunk + driveDunk
                 + fadeAway + postHook + contestShoot + threePoint + freeThrow + drive + passAccuracy
                 + passVision + dribbling + defenceRebound + offenseRebound + interiorDefence + perimeterDefence
                 + steal + block + speed + acceleration + durability + jump;

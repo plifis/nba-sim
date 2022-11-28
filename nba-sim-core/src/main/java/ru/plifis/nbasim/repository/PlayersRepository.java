@@ -8,9 +8,9 @@ import ru.plifis.nbasim.model.PlayerEntity;
 import java.util.List;
 
 @Repository
-public interface PlayersRepository extends CrudRepository<PlayerEntity, Long> {
+public interface PlayersRepository extends CrudRepository<PlayerEntity, Integer> {
 
-    PlayerEntity findPlayerEntityById(Long id);
+    PlayerEntity findPlayerEntityById(Integer id);
 
     List<PlayerEntity> findAll(Pageable pageable);
 }

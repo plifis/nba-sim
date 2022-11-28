@@ -7,6 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,13 +28,16 @@ import java.util.Objects;
 public class PositionTeamInSeasonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "team_id")
     private TeamEntity teamEntity;
 
+    @Column(name = "win")
     private Integer win;
+
+    @Column(name = "loss")
     private Integer loss;
 
     @ManyToOne

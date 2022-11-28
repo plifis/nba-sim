@@ -24,7 +24,7 @@ public class TeamController {
     }
 
     @GetMapping("/team/{id}")
-    public ResponseEntity<TeamDto> getTeamById(@PathVariable("id") Long id) {
+    public ResponseEntity<TeamDto> getTeamById(@PathVariable("id") Integer id) {
         TeamDto teamDto = teamService.findTeamById(id);
         return ResponseEntity.ok().body(teamDto);
     }
@@ -36,20 +36,20 @@ public class TeamController {
 
     //обработка дублей команд - добавить
     @PostMapping("/team/add")
-    public ResponseEntity<Long> createTeam(@RequestBody TeamDto teamDto) {
-        Long id = teamService.createTeam(teamDto);
+    public ResponseEntity<Integer> createTeam(@RequestBody TeamDto teamDto) {
+        Integer id = teamService.createTeam(teamDto);
         return ResponseEntity.ok().body(id);
     }
 
     @PutMapping("/team/{id}")
-    public ResponseEntity<TeamDto> updateTeam(@PathVariable("id") Long id,
+    public ResponseEntity<TeamDto> updateTeam(@PathVariable("id") Integer id,
                                               @RequestBody TeamDto teamDto) {
         TeamDto rsl = teamService.updateTeam(id, teamDto);
         return ResponseEntity.ok().body(rsl);
     }
 
     @DeleteMapping("/team/{id}")
-    public ResponseEntity<Void> deleteTeam(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteTeam(@PathVariable("id") Integer id) {
         teamService.deleteTeamById(id);
         return ResponseEntity.ok().build();
     }

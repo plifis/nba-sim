@@ -27,7 +27,7 @@ public class PlayersService {
     }
 
 
-    public PlayerDto findPlayerById(Long id) {
+    public PlayerDto findPlayerById(Integer id) {
         PlayerEntity playerEntity = playersRepository.findPlayerEntityById(id);
         if (playerEntity == null) {
             throw new TeamException(String.format(NOT_FOUND_PLAYER, id));
@@ -41,12 +41,12 @@ public class PlayersService {
         return playerEntityList.stream().map(dto -> playerConverter.convertPlayerEntityToPlayerDto(dto)).collect(Collectors.toList());
     }
 
-    public Long createPlayer(PlayerDto player) {
+    public Integer createPlayer(PlayerDto player) {
         var playerEntity = playerConverter.convertPlayerDtoToPlayerEntity(player);
         return playersRepository.save(playerEntity).getId();
     }
 
-    public Long updatePlayerById(Long id, PlayerDto player) {
+    public Integer updatePlayerById(Integer id, PlayerDto player) {
         PlayerEntity playerEntity = playersRepository.findPlayerEntityById(id);
         if (playerEntity == null) {
             throw new TeamException(String.format(NOT_FOUND_PLAYER, id));
@@ -55,7 +55,7 @@ public class PlayersService {
         return playersRepository.save(playerEntity).getId();
     }
 
-    public void deletePlayerById(Long id) {
+    public void deletePlayerById(Integer id) {
         playersRepository.deleteById(id);
     }
 }

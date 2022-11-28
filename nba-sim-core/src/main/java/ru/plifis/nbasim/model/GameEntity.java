@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 import ru.plifis.nbasimmodel.model.enums.GameTypeEnum;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,7 +33,7 @@ import java.util.Objects;
 public class GameEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "home_team_id")
@@ -51,6 +52,7 @@ public class GameEntity {
     private StatisticEntity awayStatisticEntity;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "game_type_name")
     private GameTypeEnum gameTypeName;
 
     @ManyToOne

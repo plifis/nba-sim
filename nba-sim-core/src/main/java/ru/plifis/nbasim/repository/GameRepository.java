@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.plifis.nbasim.model.GameEntity;
 
 @Repository
-public interface GameRepository extends CrudRepository<GameEntity, Long> {
+public interface GameRepository extends CrudRepository<GameEntity, Integer> {
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class BadgeDto {
-    private Long id;
+    private Integer id;
     private BadgeEnum badgeEnum;
 
     @JsonProperty("skills")

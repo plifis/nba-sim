@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class StatisticDto {
+    private Integer id;
     private Integer pointsTotal;
     private Integer assistsTotal;
     private Integer offReboundsTotal;
